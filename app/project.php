@@ -10,6 +10,7 @@ function getProjects() {
 	{
 		$projs[] = $row['name'];
 	}
+	
 	return json_encode($projs);
 }
 

@@ -14,23 +14,30 @@
   <div data-role="header">
     <h1>Home</h1>
   </div>
-
   <div data-role="content">
-    <h3> Elements in a list</h3>
-    <ul data-role="listview">
-      <li> Element 1 </li>
-      <li> Element 2 </li>
-      <li> Element 3 </li>
-      <li> Element 4 </li>
-      <li> Element 5 </li>
-    </ul>
-	<?php
-	include 'project.php';
-	echo  getProjects();
-	?>
+  
   </div>
 </div>
 
 </body>
 
 </html> 
+
+<script>
+	<?php 
+		include 'project.php'; 	
+		function getProjects_html() {
+			$projects =  json_decode(getProjects());
+			$projects_html = '<ul id=list data-role=listview data-inset=true>';
+			foreach ($projects as $value) {
+				$projects_html .= '<li data-icon=delete><a href=#>'.$value.'</a></li>';
+			}
+			return  utf8_encode($projects_html.'</ul>');
+		}
+
+	?>
+
+	var projects_html = 
+	$("#home div:jqmData(role=content)").append (" <?php echo getProjects_html();?>");
+	$("#list").listview("refresh");
+</script>
